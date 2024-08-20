@@ -1,0 +1,27 @@
+Esse problema ocorre quando eu tenho um dado e tento passar ele via props para um componente filho.
+Acontence que as vezes o componente filho está "distanta" do pai. Por exemplo
+
+componenteA({ dado }) {
+  <componenteB dado/>
+}
+
+componenteB({ dado }) {
+  <componenteC dado />
+}
+
+componenteC ({ dado }) {
+  <h1> dado </h1>
+}
+
+perceba que o componente C precisou de uma informação que partiu do componenteA, teve que ser interceptado por 
+B para então chegar em C.
+
+A utilização de context facilitaria bastante a logica, pois a variavel dado poderia ser coloca no contexto, e assim 
+set consumida pelo C, evitando a passagem denecessária de A até C. ficaria, portanto,
+
+componenteC () {
+  const { dado } = useContext(contexto);
+  <h1>dado<h1>
+}
+
+Perceba que facilita a logica, tornando algo totalmente mais claro e simples.
